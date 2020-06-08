@@ -1,0 +1,30 @@
+<resources>
+
+    <string name="work_chao_mung">Chào mừng %s</string>
+    <string name="work_azexpress_service">AZExpress service 24h</string>
+    <string name="work_thong_tin_cong_viec">Thông tin công việc</string>
+    <string name="work_chup_anh">Chụp ảnh</string>
+    <string name="work_da_hoan_thanh">Đã hoàn thành</string>
+
+    <string name="barcode_quet_ma">Quét mã QRcode</string>
+    <string name="barcode_dat_ma">Đặt mã QRcode vào khung hình để tiến hành quét</string>
+    <string name="barcode_quet_ma_ngay">Quét mã ngay</string>
+
+    <string name="account">Tài khoản</string>
+    <string name="account_thong_ke">Thống kê công việc của bạn</string>
+    <string name="account_ngay">Ngày</string>
+    <string name="account_thang">Tháng</string>
+    <string name="account_nam">Năm</string>
+    <string name="account_khac">Khác</string>
+    <string name="account_tong_doanh_thu">Tổng doanh thu</string>
+    <string name="account_tong_cong_viec">Tổng số công việc</string>
+    <string name="account_chinh_sua_thong_tin">Chỉnh sửa thông tin</string>
+    <string name="account_ten">Tên</string>
+    <string name="account_email">Email</string>
+    <string name="account_default_email">abc@gmail.com</string>
+    <string name="account_phone">Số điện thoại</string>
+    <string name="account_huy_bo">Huỷ bỏ</string>
+    <string name="account_luu">Lưu</string>
+
+    <string name="permission_denied">You denied %s permission.</string>
+</resources>

@@ -1,0 +1,66 @@
+<resources>
+
+    <!-- view -->
+    <declare-styleable name="BaseTextView">
+        <attr name="enableCheckFastClick" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseButton">
+        <attr name="enableCheckFastClick" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseEditText">
+        <attr name="enableCheckFastClick" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseImageView">
+        <attr name="enableCheckFastClick" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseImageButton">
+        <attr name="enableCheckFastClick" />
+    </declare-styleable>
+    <!-- view -->
+
+    <!-- scrollable view -->
+    <declare-styleable name="BaseRecyclerView">
+        <attr name="enableCheckFastClick" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseScrollView">
+        <attr name="enableCheckFastClick" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseNestedScrollView">
+        <attr name="enableCheckFastClick" />
+    </declare-styleable>
+    <!-- view scrollable -->
+
+    <!-- view group -->
+    <declare-styleable name="BaseConstraintLayout">
+        <attr name="enableCheckFastClick" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseRelativeLayout">
+        <attr name="enableCheckFastClick" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseFrameLayout">
+        <attr name="enableCheckFastClick" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseLinearLayout">
+        <attr name="enableCheckFastClick" />
+    </declare-styleable>
+    <!-- view group -->
+
+    <declare-styleable name="BlurView">
+        <attr name="color" format="color" />
+        <attr name="radiu" format="float" />
+        <attr name="mode" format="enum">
+            <enum name="outer" value="0" />
+            <enum name="normal" value="1" />
+            <enum name="solid" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.lib.core.widget.BaseImageView
+        android:id="@+id/logo_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_intro_sign_up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.lib.core.widget.BaseTextView
+        android:id="@+id/header_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/auth_tao_tai_khoan"
+        android:textColor="@color/black_87"
+        android:textSize="20sp"
+        android:layout_marginTop="@dimen/common_20dp"
+        app:layout_constraintStart_toStartOf="@id/logo_image_view"
+        app:layout_constraintTop_toBottomOf="@id/logo_image_view" />
+
+    <com.lib.core.widget.BaseTextView
+        android:id="@+id/desc_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/auth_ban_da_co_tai_khoan"
+        android:textColor="@color/scorpion"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/logo_image_view"
+        app:layout_constraintTop_toBottomOf="@id/header_text_view" />
+
+    <com.lib.core.widget.BaseTextView
+        android:id="@+id/login_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/auth_dang_nhap"
+        android:textColor="@color/ecstasy"
+        android:textSize="14sp"
+        android:layout_marginStart="6dp"
+        app:layout_constraintStart_toEndOf="@id/desc_text_view"
+        app:layout_constraintTop_toTopOf="@id/desc_text_view"
+        app:layout_constraintBottom_toBottomOf="@id/desc_text_view"/>
+
+    <com.lib.core.widget.BaseTextView
+        android:id="@+id/username_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/auth_ten_dang_nhap"
+        android:textColor="@color/black_50"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/logo_image_view"
+        app:layout_constraintTop_toBottomOf="@id/desc_text_view" />
+
+    <com.lib.core.widget.BaseEditText
+        android:id="@+id/username_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/bg_stroke_alto_radius_10"
+        android:fontFamily="@font/montserrat_regular"
+        android:hint="@string/auth_default_ten_dang_ky"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColor="@color/dusty_gray"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/logo_image_view"
+        app:layout_constraintTop_toBottomOf="@id/username_text_view" />
+
+    <com.lib.core.widget.BaseTextView
+        android:id="@+id/email_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_16dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/auth_email"
+        android:textColor="@color/black_50"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/logo_image_view"
+        app:layout_constraintTop_toBottomOf="@id/username_edit_text" />
+
+    <com.lib.core.widget.BaseEditText
+        android:id="@+id/email_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/bg_stroke_alto_radius_10"
+        android:fontFamily="@font/montserrat_regular"
+        android:hint="@string/auth_default_sign_up"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColor="@color/dusty_gray"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/logo_image_view"
+        app:layout_constraintTop_toBottomOf="@id/email_text_view" />
+
+    <com.lib.core.widget.BaseTextView
+        android:id="@+id/password_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_16dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/auth_password"
+        android:textColor="@color/black_50"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/logo_image_view"
+        app:layout_constraintTop_toBottomOf="@id/email_edit_text" />
+
+    <com.lib.core.widget.BaseEditText
+        android:id="@+id/password_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/bg_stroke_alto_radius_10"
+        android:fontFamily="@font/montserrat_regular"
+        android:hint="@string/auth_default_password"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColor="@color/dusty_gray"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/logo_image_view"
+        app:layout_constraintTop_toBottomOf="@id/password_text_view" />
+
+    <com.lib.core.widget.BaseTextView
+        android:id="@+id/sign_up_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/bg_solid_ecstaty_radius_10"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/auth_dang_ky"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/password_edit_text"
+        app:layout_constraintStart_toStartOf="@id/logo_image_view"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

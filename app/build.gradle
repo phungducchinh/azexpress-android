@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion compile_sdk_version
+    buildToolsVersion build_tools_version
+
+    defaultConfig {
+        applicationId "com.azexpress.app"
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+
+        versionCode version_code
+        versionName version_name
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", "API_BASE_URL", '"https://8x6rd0m5hb.execute-api.us-east-2.amazonaws.com/dev/"'
+
+            //If you don't need to run a Crashlytics report,
+            //then disable the plugin and speed the build process as follows:
+            ext.enableCrashlytics = false
+        }
+        release {
+            buildConfigField "String", "API_BASE_URL", '"https://8x6rd0m5hb.execute-api.us-east-2.amazonaws.com/dev/"'
+
+            // Enables code shrinking, obfuscation, and optimization for only
+            // your project's release build type.
+            minifyEnabled true
+
+            // Enables resource shrinking, which is performed by the
+            // Android Gradle plugin.
+            shrinkResources true
+
+            // Includes the default ProGuard rules files that are packaged with
+            // the Android Gradle plugin. To learn more, go to the section about
+            // R8 configuration files.
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+        }
+
+        android.applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def date = new Date().format("dd-MM-yyyy")
+                def fileName = variant.versionName + "_" + date + ".apk"
+                output.outputFileName = fileName
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation project(':app-config')
+    implementation project(':app-data')
+
+    implementation project(':features:auth')
+    implementation project(':features:main')
+
+    implementation project(':libraries:lib-core')
+    implementation project(':libraries:lib-network')
+
+    //dagger
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger_version"
+}
+
+apply plugin: 'com.google.gms.google-services'

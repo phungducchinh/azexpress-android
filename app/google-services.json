@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "533428304284",
+    "firebase_url": "https://azexpress-aa3b3.firebaseio.com",
+    "project_id": "azexpress-aa3b3",
+    "storage_bucket": "azexpress-aa3b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533428304284:android:bec7446623af2ce3c17059",
+        "android_client_info": {
+          "package_name": "com.azexpress.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533428304284-9q5ha7accd2jrksrcuu129ur9h21vvbs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.azexpress.app",
+            "certificate_hash": "fe0da3ff4d946bf4f831f3138a40fd19c4a62ac3"
+          }
+        },
+        {
+          "client_id": "533428304284-qijbpfjt9b708u7q8oj3kno578orll18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkShGZjEk7Pho2J0v97wf2yaUrHAjkA9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533428304284-qijbpfjt9b708u7q8oj3kno578orll18.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

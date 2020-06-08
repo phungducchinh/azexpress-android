@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lib.core.widget.BaseConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bottom_tab_bar_height"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <!-- start home -->
+    <com.lib.core.widget.BaseConstraintLayout
+        android:id="@+id/work_constraint_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        app:enableCheckFastClick="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.lib.core.widget.BaseImageView
+            android:id="@+id/work_image_view"
+            android:layout_width="25dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:src="@drawable/bg_work_selected"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.lib.core.widget.BaseTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="Công Việc"
+            android:textColor="@color/color_loblolly_ecstasy_selected"
+            android:textSize="@dimen/common_text_11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/work_image_view" />
+    </com.lib.core.widget.BaseConstraintLayout>
+    <!-- end home -->
+
+    <!-- start calendar -->
+    <com.lib.core.widget.BaseConstraintLayout
+        android:id="@+id/barcode_constraint_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:enableCheckFastClick="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.lib.core.widget.BaseImageView
+            android:id="@+id/barcode_image_view"
+            android:layout_width="25dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:src="@drawable/bg_barcode_selected"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.lib.core.widget.BaseTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="Quét QRcode"
+            android:textColor="@color/color_loblolly_ecstasy_selected"
+            android:textSize="@dimen/common_text_11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barcode_image_view" />
+    </com.lib.core.widget.BaseConstraintLayout>
+    <!-- end calendar -->
+
+    <!-- start menu -->
+    <com.lib.core.widget.BaseConstraintLayout
+        android:id="@+id/account_constraint_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        app:enableCheckFastClick="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.lib.core.widget.BaseImageView
+            android:id="@+id/profile_image_view"
+            android:layout_width="25dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:src="@drawable/bg_profile_selected"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.lib.core.widget.BaseTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="Tài khoản"
+            android:textColor="@color/color_loblolly_ecstasy_selected"
+            android:textSize="@dimen/common_text_11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_image_view" />
+    </com.lib.core.widget.BaseConstraintLayout>
+    <!-- end menu -->
+
+</com.lib.core.widget.BaseConstraintLayout>

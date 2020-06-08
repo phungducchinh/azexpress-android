@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lib.core.widget.BaseConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/root_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/default_dialog_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.lib.core.widget.BaseConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_solid_white_radius_20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.74">
+
+        <com.lib.core.widget.BaseTextView
+            android:id="@+id/title_text_view"
+            style="@style/BaseTextView"
+            android:layout_marginTop="@dimen/common_20dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:fontFamily="@font/sfprotext_semibold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.75"
+            tools:text="Error" />
+
+        <com.lib.core.widget.BaseTextView
+            android:id="@+id/message_text_view"
+            style="@style/BaseTextView"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:fontFamily="@font/roboto_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_text_view"
+            app:layout_constraintWidth_percent="0.75"
+            tools:text="User not found" />
+
+        <View
+            android:id="@+id/line_view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/black_15"
+            android:layout_marginTop="@dimen/common_20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/message_text_view"/>
+
+        <com.lib.core.widget.BaseTextView
+            android:id="@+id/action_text_view"
+            style="@style/BaseTextView"
+            android:gravity="center"
+            android:text="@string/action_ok"
+            android:padding="14dp"
+            android:textSize="16sp"
+            android:fontFamily="@font/sfprotext_semibold"
+            android:textColor="@color/cornflower_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_view" />
+
+    </com.lib.core.widget.BaseConstraintLayout>
+</com.lib.core.widget.BaseConstraintLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0091FF</color>
+    <color name="colorPrimaryLight">#ceff54</color>
+    <color name="colorPrimaryDark">#65a000</color>
+    <color name="colorSecondary">#212121</color>
+    <color name="colorSecondaryLight">#484848</color>
+    <color name="colorSecondaryDark">#000000</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="black_50">#80000000</color>
+    <color name="black_87">#DE000000</color>
+    <color name="scorpion">#5F5F5F</color>
+    <color name="ecstasy">#F47320</color>
+    <color name="alto">#DCDCDC</color>
+    <color name="dusty_gray">#979797</color>
+    <color name="san_marino">#4D5BB6</color>
+    <color name="loblolly">#C2C8D0</color>
+    <color name="oxford_blue">#3C4F5E</color>
+    <color name="jade">#00AD5E</color>
+    <color name="link_water">#F7F8FD</color>
+
+    <color name="cornflower_blue">#5A88FD</color>
+    <color name="black_15">#26000000</color>
+    <color name="black_20">#33000000</color>
+    <color name="default_background_color">@color/white</color>
+    <color name="default_dialog_background">#4D232f34</color>
+</resources>

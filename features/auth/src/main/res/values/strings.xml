@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="auth_vui_long_dang_nhap">Vui lòng đăng nhập</string>
+    <string name="auth_please_input_dang_nhap">Vui lòng điền tên đăng nhập và mật khẩu.</string>
+    <string name="auth_dang_ky">Đăng ký</string>
+    <string name="auth_ten_dang_nhap">Tên đăng nhập</string>
+    <string name="auth_dang_nhap">Đăng nhập</string>
+    <string name="auth_default_ten_dang_nhap">abc@gmail.com</string>
+    <string name="auth_password">Mật khẩu</string>
+    <string name="auth_default_password">*****************</string>
+    <string name="auth_forgot_password">Quên mật khẩu ?</string>
+
+    <string name="auth_tao_tai_khoan">Tạo tài khoản</string>
+    <string name="auth_ban_da_co_tai_khoan">Bạn đã có tài khoản?</string>
+    <string name="auth_default_ten_dang_ky">Product express</string>
+    <string name="auth_email">E-mail</string>
+    <string name="auth_default_sign_up">product@gmail.com</string>
+</resources>

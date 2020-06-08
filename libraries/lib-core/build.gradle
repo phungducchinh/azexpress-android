@@ -1,0 +1,59 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion compile_sdk_version
+    buildToolsVersion build_tools_version
+
+    defaultConfig {
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode version_code
+        versionName version_name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+
+    implementation project(':app-config')
+    implementation project(':app-data')
+
+    implementation project(':libraries:lib-network')
+    implementation project(':libraries:lib-utils')
+
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlin_version"
+
+    api "androidx.core:core-ktx:$rootProject.core_ktx_version"
+    api "androidx.appcompat:appcompat:$rootProject.appcompat_version"
+    api "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayout_version"
+    api "androidx.recyclerview:recyclerview:$rootProject.recyclerview_version"
+
+    // glide
+    api "com.github.bumptech.glide:glide:$rootProject.glide_version"
+
+    //rx
+    api "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlin_version"
+    api "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroid_version"
+
+    //dagger
+    api "com.google.dagger:dagger-android:$rootProject.dagger_version"
+    kapt "com.google.dagger:dagger-android:$rootProject.dagger_version"
+    api "com.google.dagger:dagger-android-support:$rootProject.dagger_version"
+    kapt "com.google.dagger:dagger-android-support:$rootProject.dagger_version"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

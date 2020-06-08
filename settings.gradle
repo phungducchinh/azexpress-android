@@ -1,0 +1,12 @@
+rootProject.name='azexpress'
+
+include ':app'
+include ':app-config'
+include ':app-data'
+
+include ':features:auth'
+include ':features:main'
+
+include ':libraries:lib-core'
+include ':libraries:lib-network'
+include ':libraries:lib-utils'

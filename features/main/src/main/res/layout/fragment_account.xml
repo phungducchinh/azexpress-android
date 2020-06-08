@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lib.core.widget.BaseConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_background_color">
+
+    <com.lib.core.widget.BaseConstraintLayout
+        android:id="@+id/top_bar_constraint_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/ecstasy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.lib.core.widget.BaseTextView
+            android:id="@+id/hello_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/account"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.lib.core.widget.BaseTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="@dimen/common_16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/account_thong_ke"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/hello_text_view"
+            app:layout_constraintTop_toBottomOf="@id/hello_text_view" />
+
+        <com.lib.core.widget.BaseImageView
+            android:id="@+id/logout_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/common_20dp"
+            android:layout_marginBottom="6dp"
+            android:src="@drawable/ic_logout"
+            app:layout_constraintBottom_toTopOf="@id/edit_image_view"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.lib.core.widget.BaseImageView
+            android:id="@+id/edit_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/common_20dp"
+            android:layout_marginBottom="@dimen/common_12dp"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </com.lib.core.widget.BaseConstraintLayout>
+
+    <com.lib.core.widget.BaseConstraintLayout
+        android:id="@+id/filter_constraint_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_account"
+        android:paddingTop="7dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_bar_constraint_layout">
+
+        <com.lib.core.widget.BaseTextView
+            android:id="@+id/day_text_view"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/bg_solid_transparent_stroke_ecstasy_dusty_gray_selected"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="@string/account_ngay"
+            android:textColor="@color/color_dusty_gray_ecstasy_selected"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/month_text_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.lib.core.widget.BaseTextView
+            android:id="@+id/month_text_view"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/bg_solid_transparent_stroke_ecstasy_dusty_gray_selected"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="@string/account_thang"
+            android:textColor="@color/color_dusty_gray_ecstasy_selected"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/year_text_view"
+            app:layout_constraintStart_toEndOf="@id/day_text_view"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.lib.core.widget.BaseTextView
+            android:id="@+id/year_text_view"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/bg_solid_transparent_stroke_ecstasy_dusty_gray_selected"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="@string/account_nam"
+            android:textColor="@color/color_dusty_gray_ecstasy_selected"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/custom_text_view"
+            app:layout_constraintStart_toEndOf="@id/month_text_view"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.lib.core.widget.BaseTextView
+            android:id="@+id/custom_text_view"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_solid_transparent_stroke_ecstasy_dusty_gray_selected"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="@string/account_khac"
+            android:textColor="@color/color_dusty_gray_ecstasy_selected"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/year_text_view"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.lib.core.widget.BaseConstraintLayout>
+
+    <com.lib.core.widget.BaseConstraintLayout
+        android:id="@+id/total_summary_constraint_layout"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="@dimen/common_16dp"
+        android:layout_marginTop="@dimen/common_12dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/ecstasy"
+        app:layout_constraintEnd_toStartOf="@id/total_work_constraint_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filter_constraint_layout">
+
+        <com.lib.core.widget.BaseTextView
+            android:id="@+id/total_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/account_tong_doanh_thu"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.lib.core.widget.BaseTextView
+            android:id="@+id/total_money_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="200.000 VND"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_text_18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/total_text_view" />
+    </com.lib.core.widget.BaseConstraintLayout>
+
+    <com.lib.core.widget.BaseConstraintLayout
+        android:id="@+id/total_work_constraint_layout"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="@dimen/common_8dp"
+        android:layout_marginTop="@dimen/common_12dp"
+        android:layout_marginEnd="@dimen/common_16dp"
+        android:background="#3C80F7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/total_summary_constraint_layout"
+        app:layout_constraintTop_toBottomOf="@id/filter_constraint_layout">
+
+        <com.lib.core.widget.BaseTextView
+            android:id="@+id/total_work_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/account_tong_cong_viec"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.lib.core.widget.BaseTextView
+            android:id="@+id/total_worked_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="200"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_text_18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/total_work_text_view" />
+    </com.lib.core.widget.BaseConstraintLayout>
+
+</com.lib.core.widget.BaseConstraintLayout>
