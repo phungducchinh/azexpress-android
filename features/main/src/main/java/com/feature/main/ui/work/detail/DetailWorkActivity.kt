@@ -2,6 +2,7 @@ package com.feature.main.ui.work.detail
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import com.app.config.AppConstants
 import com.lib.core.activity.navigator.NavigatorActivity
 import com.feature.main.R
 import com.feature.main.ui.work.detail.fragment.DetailWorkFragment
@@ -34,6 +35,10 @@ class DetailWorkActivity : NavigatorActivity(),
     fun init(savedInstanceState: Bundle?) {
         super.init(savedInstanceState)
 
-        pushFragment(DetailWorkFragment.newInstance(), DetailWorkFragment.TAG, false)
+        var bundle : Bundle?  = null
+        intent?.let {
+            bundle = it.getBundleExtra(AppConstants.BUNDLE)
+        }
+        pushFragment(DetailWorkFragment.newInstance(bundle), DetailWorkFragment.TAG, false)
     }
 }

@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "533428304284",
-    "firebase_url": "https://azexpress-aa3b3.firebaseio.com",
-    "project_id": "azexpress-aa3b3",
-    "storage_bucket": "azexpress-aa3b3.appspot.com"
+    "project_number": "207441022340",
+    "firebase_url": "https://azexpress-de062.firebaseio.com",
+    "project_id": "azexpress-de062",
+    "storage_bucket": "azexpress-de062.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:533428304284:android:bec7446623af2ce3c17059",
+        "mobilesdk_app_id": "1:207441022340:android:71b4338a31decf234021d1",
         "android_client_info": {
           "package_name": "com.azexpress.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "533428304284-9q5ha7accd2jrksrcuu129ur9h21vvbs.apps.googleusercontent.com",
+          "client_id": "207441022340-tar9hramsu0eh4n9f2b9qlros5sedqnt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.azexpress.app",
@@ -23,21 +23,28 @@
           }
         },
         {
-          "client_id": "533428304284-qijbpfjt9b708u7q8oj3kno578orll18.apps.googleusercontent.com",
+          "client_id": "207441022340-qph26rbe1t12a1vla8pu0kflio39o74a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCkShGZjEk7Pho2J0v97wf2yaUrHAjkA9Q"
+          "current_key": "AIzaSyBr0kAED6havrw3ySzeDjuKqZGoQucn9fA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "533428304284-qijbpfjt9b708u7q8oj3kno578orll18.apps.googleusercontent.com",
+              "client_id": "207441022340-qph26rbe1t12a1vla8pu0kflio39o74a.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "207441022340-j7nlimj9gjp097500rvq5h2b8jg3sitc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.DucChinh.AZExpress"
+              }
             }
           ]
         }

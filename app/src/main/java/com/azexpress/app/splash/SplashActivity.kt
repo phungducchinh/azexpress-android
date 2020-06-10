@@ -91,11 +91,11 @@ class SplashActivity : BaseSplashActivity(), SplashActivityContract.View {
         if (mApplicationLifecycleManager.isAppAlive() && mApplicationLifecycleManager.getForegroundActivity() != null) {
             bringAppToForeground(mApplicationLifecycleManager.getForegroundActivity())
         } else {
-//            if (mViewModel.isLogin()) {
+            if (mViewModel.isLogin()) {
                 startMainFlow()
-//            } else {
-//                startAuthenticateFlow()
-//            }
+            } else {
+                startAuthenticateFlow()
+            }
         }
         finish()
     }

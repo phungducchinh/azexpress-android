@@ -73,15 +73,17 @@
         app:layout_constraintTop_toTopOf="@id/qr_code_text_view" />
 
     <com.lib.core.widget.BaseTextView
+        android:id="@+id/status_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/common_16dp"
         android:background="@drawable/bg_solid_jade_radius_8"
         android:fontFamily="@font/montserrat_medium"
         android:padding="6dp"
         android:text="@string/work_da_hoan_thanh"
         android:textColor="@color/white"
         android:textSize="12sp"
-        android:layout_marginEnd="@dimen/common_16dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/qr_code_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/qr_code_text_view" />
@@ -102,16 +104,14 @@
         android:id="@+id/name_customer_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:fontFamily="@font/montserrat_medium"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/customer_text_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/customer_text_view"
+        app:layout_constraintStart_toStartOf="@id/code_text_view"
         app:layout_constraintTop_toTopOf="@id/customer_text_view"
         tools:text="Nguyễn Văn Thành" />
-
 
     <com.lib.core.widget.BaseTextView
         android:id="@+id/staff_text_view"
@@ -129,63 +129,90 @@
         android:id="@+id/name_staff_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:fontFamily="@font/montserrat_medium"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/staff_text_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/staff_text_view"
+        app:layout_constraintStart_toStartOf="@id/name_customer_text_view"
         app:layout_constraintTop_toTopOf="@id/staff_text_view"
         tools:text="Phạm Trần Huy Hợp" />
 
-    <com.lib.core.widget.BaseImageView
-        android:id="@+id/phone_image_view"
-        android:layout_width="wrap_content"
+    <com.lib.core.widget.BaseTextView
+        android:id="@+id/tv_phone"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_phone"
-        app:layout_constraintBottom_toBottomOf="@id/phone_text_view"
-        app:layout_constraintStart_toStartOf="@id/qr_code_text_view"
-        app:layout_constraintTop_toTopOf="@id/phone_text_view" />
+        android:layout_margin="@dimen/common_16dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="Số điện thoại: "
+        android:textColor="@color/oxford_blue"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/staff_text_view" />
 
     <com.lib.core.widget.BaseTextView
         android:id="@+id/phone_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat_regular"
         android:textColor="@color/oxford_blue"
         android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_phone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/phone_image_view"
-        app:layout_constraintTop_toBottomOf="@id/staff_text_view"
+        app:layout_constraintStart_toStartOf="@id/name_customer_text_view"
+        app:layout_constraintTop_toTopOf="@id/tv_phone"
         tools:text="0989987788" />
 
-    <com.lib.core.widget.BaseImageView
-        android:id="@+id/location_image_view"
-        android:layout_width="wrap_content"
+    <com.lib.core.widget.BaseTextView
+        android:id="@+id/tv_address"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_location"
-        app:layout_constraintBottom_toBottomOf="@id/address_text_view"
-        app:layout_constraintStart_toStartOf="@id/qr_code_text_view"
-        app:layout_constraintTop_toTopOf="@id/address_text_view" />
+        android:layout_margin="@dimen/common_16dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="Địa chỉ: "
+        android:textColor="@color/oxford_blue"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/phone_text_view" />
 
     <com.lib.core.widget.BaseTextView
         android:id="@+id/address_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="10dp"
         android:fontFamily="@font/montserrat_regular"
         android:textColor="@color/oxford_blue"
         android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_address"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/location_image_view"
-        app:layout_constraintTop_toBottomOf="@id/phone_text_view"
+        app:layout_constraintStart_toStartOf="@id/name_customer_text_view"
+        app:layout_constraintTop_toTopOf="@id/tv_address"
         tools:text="312 Nguyễn Thị Định, Phường Bình Trưng Tây, Quận 2, Thành
 Phố Hồ Chí Minh" />
+
+    <com.lib.core.widget.BaseTextView
+        android:id="@+id/tv_date_complete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_16dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="Ngày hoàn thành: "
+        android:textColor="@color/oxford_blue"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/address_text_view" />
+
+    <com.lib.core.widget.BaseTextView
+        android:id="@+id/date_complete_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:textColor="@color/oxford_blue"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_date_complete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/name_customer_text_view"
+        app:layout_constraintTop_toTopOf="@id/tv_date_complete"
+        tools:text="12:20 7/6/2020" />
 
     <com.lib.core.widget.BaseTextView
         android:id="@+id/image_text_view"
@@ -197,7 +224,7 @@ Phố Hồ Chí Minh" />
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@id/qr_code_text_view"
-        app:layout_constraintTop_toBottomOf="@id/address_text_view" />
+        app:layout_constraintTop_toBottomOf="@id/date_complete_text_view" />
 
     <com.lib.core.widget.BaseTextView
         android:id="@+id/note_text_view"
@@ -256,9 +283,9 @@ Phố Hồ Chí Minh" />
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="@dimen/common_16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_text_view"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_text_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

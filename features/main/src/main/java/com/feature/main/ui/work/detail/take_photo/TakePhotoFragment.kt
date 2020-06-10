@@ -25,6 +25,9 @@ import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.app.config.AppConstants
+import com.app.data.model.TaskModel
+import com.bumptech.glide.Glide
 import com.feature.main.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -38,19 +41,23 @@ import com.lib.core.fragment.BaseFragment
 import com.lib.core.widget.BaseConstraintLayout
 import com.lib.core.widget.BaseFrameLayout
 import com.lib.core.widget.BaseImageView
+import com.lib.core.widget.BaseTextView
 import com.lib.utils.CommonUtils
-import java.io.FileNotFoundException
-import java.io.IOException
+import com.lib.utils.datetime.DateUtils
+import java.io.*
 import java.util.*
 
 class TakePhotoFragment : BaseFragment(),
     TakePhotoFragmentContract.View,
     LocationListener {
 
-    private val REQUEST_PERMISSION_LOCATION = 101
+    private val REQUEST_PERMISSION = 101
+
     private lateinit var mViewModel: TakePhotoFragmentViewModel
 
     private var mTextureView: TextureView? = null
+    private var mAddressTextView: BaseTextView? = null
+    private var mDateTextView: BaseTextView? = null
     private var mResultImageView: BaseImageView? = null
     private var mMapImageView: BaseImageView? = null
     private var mBackFrameLayout: BaseFrameLayout? = null
@@ -72,19 +79,21 @@ class TakePhotoFragment : BaseFragment(),
     private var imageDimension: Size? = null
     private var imageReader: ImageReader? = null
 
-    private val REQUEST_CAMERA_PERMISSION = 200
     private var mBackgroundHandler: Handler? = null
     private var mBackgroundThread: HandlerThread? = null
 
     private var mOnTakePhotoFragmentListener: OnTakePhotoFragmentListener? = null
 
+    private var mTaskModel: TaskModel? = null
+
     companion object {
         const val TAG = "TakePhotoFragment"
 
-        fun newInstance(): TakePhotoFragment {
+        fun newInstance(taskModel: TaskModel?): TakePhotoFragment {
             val args = Bundle()
             val fragment =
                 TakePhotoFragment()
+            args.putParcelable(AppConstants.TASK_MODEL_KEY, taskModel)
             fragment.arguments = args
             return fragment
         }
@@ -108,17 +117,22 @@ class TakePhotoFragment : BaseFragment(),
         super.init(view)
 
         mTextureView = view.findViewById(R.id.texture_view)
+        mAddressTextView = view.findViewById(R.id.address_text_view)
+        mDateTextView = view.findViewById(R.id.date_text_view)
         mBackFrameLayout = view.findViewById(R.id.back_frame_layout)
         mResultImageView = view.findViewById(R.id.result_image_view)
         mMapImageView = view.findViewById(R.id.map_image_view)
         mContentConstraintLayout = view.findViewById(R.id.content_constraint_layout)
         mCameraConstraintLayout = view.findViewById(R.id.camera_constraint_layout)
 
-        initData()
-        initListener()
+        checkPermissition()
     }
 
     private fun initData() {
+        arguments?.let {
+            mTaskModel = it.getParcelable(AppConstants.TASK_MODEL_KEY)
+        }
+
         mLocationManager =
             activity!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         val mapFragment =
@@ -150,7 +164,20 @@ class TakePhotoFragment : BaseFragment(),
                 }
                 isMapReady = true
             }
-            enableMyLocationIfPermitted()
+            if (mMap != null && ContextCompat.checkSelfPermission(
+                    context!!,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                mMap?.isMyLocationEnabled = true
+                mLocationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this)
+                mLocationManager?.requestLocationUpdates(
+                    LocationManager.NETWORK_PROVIDER,
+                    0,
+                    0f,
+                    this
+                )
+            }
         }
 
         mTextureView?.surfaceTextureListener = textureListener
@@ -158,6 +185,25 @@ class TakePhotoFragment : BaseFragment(),
         ORIENTATIONS.append(Surface.ROTATION_90, 0)
         ORIENTATIONS.append(Surface.ROTATION_180, 270)
         ORIENTATIONS.append(Surface.ROTATION_270, 180)
+
+        mTaskModel?.let {
+            mAddressTextView?.text = it.address
+
+            mDateTextView?.text = DateUtils.parseDateToString(DateUtils.getCurrentDate(),AppConstants.DateTime.DATE_FORMAT)
+        }
+
+        mViewModel.requestUpdateTaskLiveData()
+            ?.observe(this, androidx.lifecycle.Observer<TaskModel?> {
+                hideLoading()
+                mOnTakePhotoFragmentListener?.onTakePhotoSuccess(it)
+                getNavigatorActivity()?.popFragment(true)
+            })
+
+        mViewModel.requestUpdateTaskErrorLiveData()
+            ?.observe(this, androidx.lifecycle.Observer<String> {
+                hideLoading()
+                showDefaultErrorDialog(it)
+            })
     }
 
     private fun initListener() {
@@ -165,37 +211,46 @@ class TakePhotoFragment : BaseFragment(),
         mCameraConstraintLayout?.setOnClickListener(this)
     }
 
+    private fun checkPermissition() {
+        if (ContextCompat.checkSelfPermission(
+                context!!,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+            && ContextCompat.checkSelfPermission(
+                context!!,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            handleData()
+        } else {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.CAMERA
+                ),
+                REQUEST_PERMISSION
+            )
+        }
+    }
+
+    private fun handleData() {
+        initData()
+        initListener()
+    }
+
     override
     fun onViewClick(v: View) {
         super.onViewClick(v)
         if (v == mBackFrameLayout) {
-            getNavigatorActivity()?.finish()
+            getNavigatorActivity()?.popFragment(true)
         } else if (v == mCameraConstraintLayout) {
+            showLoading()
             captureScreen()
             takePicture()
         }
     }
 
-    private fun enableMyLocationIfPermitted() {
-        if (activity == null) return
-
-        if (ContextCompat.checkSelfPermission(
-                activity!!,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            requestPermissions(
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ),
-                REQUEST_PERMISSION_LOCATION
-            )
-        } else if (mMap != null) {
-            mMap?.isMyLocationEnabled = true
-            mLocationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this)
-            mLocationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0f, this)
-        }
-    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -204,33 +259,29 @@ class TakePhotoFragment : BaseFragment(),
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (activity == null) return
-        if (requestCode == REQUEST_PERMISSION_LOCATION) {
+        if (requestCode == REQUEST_PERMISSION) {
             if (ContextCompat.checkSelfPermission(
                     activity!!,
                     Manifest.permission.ACCESS_FINE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
+                ) != PackageManager.PERMISSION_GRANTED
             ) {
-                enableMyLocationIfPermitted()
-            } else {
                 Toast.makeText(
                     context,
                     getString(R.string.permission_denied, "Location"),
                     Toast.LENGTH_SHORT
                 ).show()
-            }
-        } else if (requestCode == REQUEST_CAMERA_PERMISSION) {
-            if (ContextCompat.checkSelfPermission(
+            } else if (ContextCompat.checkSelfPermission(
                     activity!!,
                     Manifest.permission.CAMERA
-                ) == PackageManager.PERMISSION_GRANTED
+                ) != PackageManager.PERMISSION_GRANTED
             ) {
-                openCamera()
-            } else {
                 Toast.makeText(
                     context,
                     getString(R.string.permission_denied, "Camera"),
                     Toast.LENGTH_SHORT
                 ).show()
+            } else {
+                handleData()
             }
         }
     }
@@ -362,15 +413,7 @@ class TakePhotoFragment : BaseFragment(),
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
                     manager.openCamera(it, stateCallback, null)
-                } else {
-                    requestPermissions(
-                        arrayOf(
-                            Manifest.permission.CAMERA
-                        ),
-                        REQUEST_CAMERA_PERMISSION
-                    )
                 }
-
             }
         } catch (e: CameraAccessException) {
             e.printStackTrace()
@@ -435,10 +478,10 @@ class TakePhotoFragment : BaseFragment(),
                 cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
             captureBuilder?.addTarget(reader.surface)
             captureBuilder?.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO)
-            val rotation = activity?.windowManager?.defaultDisplay?.rotation
-            rotation?.let {
-                captureBuilder?.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS[rotation])
-            }
+//            val rotation = activity?.windowManager?.defaultDisplay?.rotation
+//            rotation?.let {
+//                captureBuilder?.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS[rotation])
+//            }
             val readerListener: ImageReader.OnImageAvailableListener =
                 ImageReader.OnImageAvailableListener { reader ->
                     var image: Image? = null
@@ -452,11 +495,10 @@ class TakePhotoFragment : BaseFragment(),
                             mResultImageView?.setImageBitmap(bitmap)
                             mContentConstraintLayout?.let {
                                 bitmap = CommonUtils.screenShot(it)
-                                mOnTakePhotoFragmentListener?.onTakePhotoSuccess(bitmap)
+                                checkData(bitmap)
                             }
-                            getNavigatorActivity()?.popFragment(true)
                         }
-
+                        hideLoading()
                     } catch (e: FileNotFoundException) {
                         e.printStackTrace()
                     } catch (e: IOException) {
@@ -503,6 +545,28 @@ class TakePhotoFragment : BaseFragment(),
         }
     }
 
+    private fun checkData(bitmap: Bitmap?) {
+        showLoading()
+        val pictureFile = File(context!!.cacheDir, "image")
+        pictureFile.createNewFile()
+
+        val bos = ByteArrayOutputStream()
+        bitmap?.compress(Bitmap.CompressFormat.JPEG, 90, bos);
+        val bitmapdata = bos.toByteArray()
+        try {
+            val fos = FileOutputStream(pictureFile)
+            fos.write(bitmapdata)
+            fos.close()
+        } catch (e: FileNotFoundException) {
+            hideLoading()
+        } catch (e: IOException) {
+            hideLoading()
+        }
+        mViewModel.requestUpdateTask(mTaskModel?.taskCode, pictureFile)
+
+        //                                mOnTakePhotoFragmentListener?.onTakePhotoSuccess(bitmap)
+    }
+
     private fun closeCamera() {
         if (null != cameraDevice) {
             cameraDevice?.close()
@@ -524,7 +588,7 @@ class TakePhotoFragment : BaseFragment(),
     }
 
     interface OnTakePhotoFragmentListener {
-        fun onTakePhotoSuccess(bitmap: Bitmap?)
+        fun onTakePhotoSuccess(taskModel: TaskModel?)
     }
 
     private fun captureScreen() {

@@ -5,6 +5,7 @@ import android.util.Log
 import com.app.config.di.scope.PerApplication
 import com.app.data.local.prefers.PrefersHelper
 import com.app.data.model.ErrorBody
+import com.app.data.remote.api.app.task.TaskApi
 import com.app.data.remote.api.app.user.UserApi
 import com.app.data.remote.interceptor.AddHeadersInterceptor
 import com.app.data.remote.interceptor.UnauthorizedInterceptor
@@ -122,6 +123,14 @@ object RetrofitModule {
     @PerApplication
     fun provideUserApi(retrofit: Retrofit): UserApi {
         return retrofit.create(UserApi::class.java)
+    }
+
+
+    @Provides
+    @JvmStatic
+    @PerApplication
+    fun provideTaskApi(retrofit: Retrofit): TaskApi {
+        return retrofit.create(TaskApi::class.java)
     }
 
 }

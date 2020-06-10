@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.lib.core.activity.navigator.NavigatorActivity
 import com.feature.auth.fragment.sign_in.SignInFragment
+import com.feature.auth.fragment.sign_up.SignUpFragment
 
 class AuthActivity : NavigatorActivity(),
     AuthActivityContract.View {
@@ -32,6 +33,6 @@ class AuthActivity : NavigatorActivity(),
     fun init(savedInstanceState: Bundle?) {
         super.init(savedInstanceState)
 
-        pushFragment(SignInFragment.newInstance(), SignInFragment.TAG, false)
+        pushFragment(SignUpFragment.newInstance(), SignUpFragment.TAG, false)
     }
 }

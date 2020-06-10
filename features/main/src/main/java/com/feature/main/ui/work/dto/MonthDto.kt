@@ -34,7 +34,7 @@ class MonthDto(private var day: Int, private var month: Int, private var year: I
         calendar.time = date
         val dayOfWeek: Int = calendar.get(Calendar.DAY_OF_WEEK)
 
-        return if (Calendar.MONDAY === dayOfWeek) {
+        return if (Calendar.MONDAY == dayOfWeek) {
              "T2"
         } else if (Calendar.TUESDAY === dayOfWeek) {
              "T3"

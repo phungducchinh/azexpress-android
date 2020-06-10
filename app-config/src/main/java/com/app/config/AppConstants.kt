@@ -3,9 +3,12 @@ package com.app.config
 object AppConstants {
 
     const val TAG = "DEBUG_TAG"
+    const val TASK_MODEL_KEY = "TASK_MODEL_KEY"
+    const val ID_TASK_MODEL_KEY = "ID_TASK_MODEL_KEY"
     const val BUNDLE = "BUNDLE_TAG"
 
     const val AZEXPRESS_DEVICE_KEY = "com.app.config.AZEXPRESS_DEVICE_KEY"
+    const val DETAIL_TASK_KEY = 101
 
     const val DAY_SUNDAY = 0
     const val DAY_MONDAY = 1
@@ -21,6 +24,7 @@ object AppConstants {
 
     object DateTime {
         const val DEFAULT_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        const val DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
     }
 
     object WebView {

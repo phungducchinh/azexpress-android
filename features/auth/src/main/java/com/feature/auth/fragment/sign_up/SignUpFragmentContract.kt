@@ -12,5 +12,7 @@ interface SignUpFragmentContract {
         fun requestSignUpLiveData(): MutableLiveData<Boolean>?
         fun requestSignUp(name: String?, email: String?, password: String?)
         fun requestSignUpErrorLiveData(): MutableLiveData<String>?
+
+        fun setToken()
     }
 }

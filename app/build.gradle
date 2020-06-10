@@ -19,14 +19,14 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "API_BASE_URL", '"https://8x6rd0m5hb.execute-api.us-east-2.amazonaws.com/dev/"'
+            buildConfigField "String", "API_BASE_URL", '"https://catalog.azexpress.com.vn/v1/"'
 
             //If you don't need to run a Crashlytics report,
             //then disable the plugin and speed the build process as follows:
             ext.enableCrashlytics = false
         }
         release {
-            buildConfigField "String", "API_BASE_URL", '"https://8x6rd0m5hb.execute-api.us-east-2.amazonaws.com/dev/"'
+            buildConfigField "String", "API_BASE_URL", '"https://catalog.azexpress.com.vn/v1/"'
 
             // Enables code shrinking, obfuscation, and optimization for only
             // your project's release build type.

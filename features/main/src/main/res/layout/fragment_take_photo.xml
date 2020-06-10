@@ -98,10 +98,12 @@
                 android:text="312 Bình Trưng Tây, Phường Bình Trưng Tây, Quận 2, TP.HCM"
                 android:textColor="@color/white"
                 android:textSize="@dimen/common_text_15sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.lib.core.widget.BaseTextView
+                android:id="@+id/date_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"

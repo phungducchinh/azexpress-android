@@ -48,6 +48,10 @@ class SignUpFragmentViewModel @Inject constructor(
         return mRequestSignUpLiveDataError
     }
 
+    override fun setToken() {
+        mPrefersHelper.setToken("abc")
+    }
+
     override
     fun requestSignUp(name: String?, email: String?, password: String?) {
         val request = SignUpRequest(name, email, password)

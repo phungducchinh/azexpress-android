@@ -3,9 +3,12 @@ package com.feature.main.ui.work
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.config.AppConstants
+import com.app.data.model.TaskModel
 import com.feature.main.R
 import com.feature.main.ui.Work.adapter.WorkAdapter
 import com.feature.main.ui.work.adapter.CalendarAdapter
@@ -24,11 +27,13 @@ class WorkFragment : BaseFragment(),
 
     private var mWorkRecyclerView: BaseRecyclerView? = null
 
+    private var mHelloTextView: BaseTextView? = null
     private var mMonthTextView: BaseTextView? = null
     private var mPreviousFrameLayout: BaseFrameLayout? = null
     private var mNextFrameLayout: BaseFrameLayout? = null
     private var mCalendarRecyclerView: BaseRecyclerView? = null
     private var mCalendarAdapter: CalendarAdapter? = null
+    private var mWorkAdapter: WorkAdapter? = null
 
     companion object {
         const val TAG = "WorkFragment"
@@ -58,6 +63,7 @@ class WorkFragment : BaseFragment(),
     fun init(view: View) {
         super.init(view)
 
+        mHelloTextView = view.findViewById(R.id.hello_text_view)
         mMonthTextView = view.findViewById(R.id.month_text_view)
         mPreviousFrameLayout = view.findViewById(R.id.previous_frame_layout)
         mNextFrameLayout = view.findViewById(R.id.next_frame_layout)
@@ -70,16 +76,22 @@ class WorkFragment : BaseFragment(),
 
     private fun initData() {
         mMonthTextView?.text = String.format("Tháng %d", mViewModel.getMonth() + 1)
+        mHelloTextView?.text = getString(R.string.work_chao_mung, "Chính")
 
-        val workAdapter = WorkAdapter(context, mOnActivityCheckFastClickHelper)
-        workAdapter.setOnWorkAdapterListener(object : WorkAdapter.OnWorkAdapterListener {
-            override fun onWorkClick() {
-                val intent = Intent(context, DetailWorkActivity::class.java)
-                startActivity(intent)
-            }
-        })
+        mWorkAdapter = WorkAdapter(
+            context,
+            mOnActivityCheckFastClickHelper,
+            object : WorkAdapter.OnWorkAdapterListener {
+                override fun onWorkClick(taskModel: TaskModel) {
+                    val intent = Intent(context, DetailWorkActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putString(AppConstants.ID_TASK_MODEL_KEY, taskModel.taskCode)
+                    intent.putExtra(AppConstants.BUNDLE, bundle)
+                    startActivityForResult(intent, AppConstants.DETAIL_TASK_KEY)
+                }
+            })
         mWorkRecyclerView?.layoutManager = LinearLayoutManager(context)
-        mWorkRecyclerView?.adapter = workAdapter
+        mWorkRecyclerView?.adapter = mWorkAdapter
 
         mCalendarAdapter = CalendarAdapter(
             context!!,
@@ -87,11 +99,30 @@ class WorkFragment : BaseFragment(),
             mViewModel.getYear(),
             this
         )
-        val mLayoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        mCalendarRecyclerView?.layoutManager = mLayoutManager
+        mCalendarRecyclerView?.layoutManager =
+            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         mCalendarRecyclerView?.adapter = mCalendarAdapter
 
-        mCalendarAdapter?.setItems(mViewModel.requestListDate())?.notifyDataSetChanged()
+        mCalendarAdapter?.setItems(mViewModel.requestListDate())
+        mCalendarAdapter?.setCurrentPosition(mViewModel.getCurrentDay())
+        mCalendarAdapter?.notifyDataSetChanged()
+        mCalendarRecyclerView?.scrollToPosition(mViewModel.getCurrentDay() - 3)
+
+
+        mViewModel.requestGetListTaskLiveData()?.observe(this, Observer<List<TaskModel>?> {
+            hideLoading()
+            mWorkAdapter?.setData(it)
+            mWorkAdapter?.notifyDataSetChanged()
+        })
+
+        mViewModel.requestGetListTaskErrorLiveData()?.observe(this, Observer<String> {
+            hideLoading()
+            showDefaultErrorDialog(it)
+        })
+
+        showLoading()
+        mViewModel.requestGetListTask()
+
     }
 
     private fun initListener() {
@@ -99,12 +130,7 @@ class WorkFragment : BaseFragment(),
         mPreviousFrameLayout?.setOnClickListener(this)
     }
 
-
     private fun showPreviousMonth() {
-        if (mCalendarAdapter?.getCurrentPosition() != -1) {
-//            mViewModel.setCurrentSelected(mAdapterCalendar.getCurrentItem())
-        }
-
         if (mViewModel.getMonth() == 0) {
             mViewModel.setMonth(11)
             mViewModel.setYear(mViewModel.getYear() - 1)
@@ -115,10 +141,6 @@ class WorkFragment : BaseFragment(),
     }
 
     private fun showNextMonth() {
-        if (mCalendarAdapter?.getCurrentPosition() != -1) {
-//            mViewModel.setCurrentSelected(mAdapterCalendar.getCurrentItem())
-        }
-
         if (mViewModel.getMonth() == 11) {
             mViewModel.setMonth(0)
             mViewModel.setYear(mViewModel.getYear() + 1)
@@ -153,7 +175,10 @@ class WorkFragment : BaseFragment(),
 
     }
 
-    override fun onUnClick() {
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == AppConstants.DETAIL_TASK_KEY){
+            mViewModel.requestGetListTask()
+        }
     }
 }

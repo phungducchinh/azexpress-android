@@ -1,16 +1,19 @@
 package com.feature.main.ui.barcode
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.app.config.AppConstants
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.CodeScannerView
 import com.budiyev.android.codescanner.DecodeCallback
 import com.feature.main.R
+import com.feature.main.ui.work.detail.DetailWorkActivity
 import com.lib.core.fragment.BaseFragment
 import com.lib.core.widget.BaseTextView
 
@@ -20,7 +23,7 @@ class ScanBarCodeFragment : BaseFragment(),
     private lateinit var mViewModel: ScanBarCodeFragmentViewModel
     private val REQUEST_CAMERA_PERMISSION = 201
 
-    private var mScanBarCodeTextView: BaseTextView? = null
+//    private var mScanBarCodeTextView: BaseTextView? = null
 
     private var mCodeScanner: CodeScanner? = null
     private var mCodeScannerView: CodeScannerView? = null
@@ -54,7 +57,7 @@ class ScanBarCodeFragment : BaseFragment(),
         super.init(view)
 
         mCodeScannerView = view.findViewById(R.id.scanner_view)
-        mScanBarCodeTextView = view.findViewById(R.id.scan_barcode_text_view)
+//        mScanBarCodeTextView = view.findViewById(R.id.scan_barcode_text_view)
 
         initData()
         initListener()
@@ -66,17 +69,19 @@ class ScanBarCodeFragment : BaseFragment(),
         }
         mCodeScanner?.decodeCallback = DecodeCallback { result ->
             activity?.runOnUiThread {
-                Toast.makeText(
-                    context!!,
-                    result.text,
-                    Toast.LENGTH_SHORT
-                ).show()
+                val intent = Intent(context, DetailWorkActivity::class.java)
+                val bundle = Bundle()
+                bundle.putString(AppConstants.ID_TASK_MODEL_KEY, result.text)
+                intent.putExtra(AppConstants.BUNDLE, bundle)
+                startActivityForResult(intent, AppConstants.DETAIL_TASK_KEY)
             }
         }
+
+        checkPermission()
     }
 
     private fun initListener() {
-        mScanBarCodeTextView?.setOnClickListener(this)
+//        mScanBarCodeTextView?.setOnClickListener(this)
     }
 
     override fun onPause() {
@@ -84,12 +89,13 @@ class ScanBarCodeFragment : BaseFragment(),
         mCodeScanner?.releaseResources()
     }
 
+
     override
     fun onViewClick(v: View) {
         super.onViewClick(v)
-        if (v == mScanBarCodeTextView) {
-            checkPermission()
-        }
+//        if (v == mScanBarCodeTextView) {
+//            checkPermission()
+//        }
     }
 
     private fun checkPermission() {
@@ -141,5 +147,10 @@ class ScanBarCodeFragment : BaseFragment(),
         ) {
             mCodeScanner?.startPreview()
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
     }
 }

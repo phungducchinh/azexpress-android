@@ -49,6 +49,10 @@ class SignInFragmentViewModel @Inject constructor(
         return mRequestSignInLiveDataError
     }
 
+    override fun setToken() {
+        mPrefersHelper.setToken("abc")
+    }
+
     override
     fun requestLogin(email: String?, password: String?) {
         val request = LoginRequest(email, password)

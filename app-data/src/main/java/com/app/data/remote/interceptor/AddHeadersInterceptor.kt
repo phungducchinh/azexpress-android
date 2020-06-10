@@ -14,7 +14,7 @@ class AddHeadersInterceptor(
     fun  intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
         val requestBuilder = original.newBuilder()
-            .header("token", "" + mPreferHelper.getToken())
+//            .header("token", "" + mPreferHelper.getToken())
 //            .header("x-api-key", "")
             .method(original.method(), original.body())
 

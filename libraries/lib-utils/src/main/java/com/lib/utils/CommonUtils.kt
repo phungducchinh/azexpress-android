@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Looper
 import android.os.Process
+import android.provider.Settings
 import android.util.DisplayMetrics
 import android.util.Log
 import android.util.TypedValue
@@ -104,10 +105,14 @@ object CommonUtils {
         }
         val bitmap = Bitmap.createBitmap(
             view.width,
-            view.height, Bitmap.Config.ARGB_8888
+            view.height, Bitmap.Config.ARGB_4444
         )
         val canvas = Canvas(bitmap)
         view.draw(canvas)
         return bitmap
+    }
+
+    fun getAndroidId(context: Context?): String {
+        return Settings.Secure.getString(context?.contentResolver, Settings.Secure.ANDROID_ID)
     }
 }

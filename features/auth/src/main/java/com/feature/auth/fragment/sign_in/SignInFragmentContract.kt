@@ -16,6 +16,6 @@ interface SignInFragmentContract {
 
         fun requestSignInErrorLiveData(): MutableLiveData<String>?
 
-
+        fun setToken()
     }
 }

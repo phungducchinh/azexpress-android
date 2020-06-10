@@ -1,6 +1,7 @@
 package com.lib.utils.datetime
 
 import android.util.Pair
+import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -85,11 +86,7 @@ object DateUtils {
         source: String?,
         format: String?
     ): Date? {
-        return parseStringToDate(
-            source,
-            format,
-            Locale.US
-        )
+        return parseStringToDate(source, format, Locale.US)
     }
 
     fun parseStringToDate(
@@ -129,18 +126,15 @@ object DateUtils {
         return if (source == null || format == null || locale == null) {
             null
         } else {
-            val simpleDateFormat = SimpleDateFormat(format, locale)
-            return simpleDateFormat.format(simpleDateFormat)
+            val df: DateFormat = SimpleDateFormat(format, locale)
+            return df.format(source)
         }
     }
 
     fun getCurrentDate(): Date {
         val cal = Calendar.getInstance()
-        return convertTimeZone(
-            cal.time,
-            TimeZone.getDefault(),
-            TimeZone.getDefault()
-        )
+        cal.time = Date()
+        return cal.time
     }
 
     fun isSameDay(leftDate: Date, rightDate: Date): Boolean {
@@ -158,7 +152,6 @@ object DateUtils {
         cal.time = getCurrentDate()
         return cal.get(Calendar.MONTH)
     }
-
 
     // get current month as number
     fun getCurrentDay(): Int {

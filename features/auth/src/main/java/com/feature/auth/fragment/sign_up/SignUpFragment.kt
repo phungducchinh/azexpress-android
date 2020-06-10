@@ -2,6 +2,7 @@ package com.feature.auth.fragment.sign_up
 
 import android.app.ActivityOptions
 import android.os.Bundle
+import android.os.Handler
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.config.Actions
 import com.lib.core.fragment.BaseFragment
 import com.feature.auth.R
+import com.feature.auth.fragment.sign_in.SignInFragment
 import com.feature.auth.utils.ValidateUtils
 import com.lib.core.widget.BaseEditText
 import com.lib.core.widget.BaseTextView
@@ -91,7 +93,7 @@ class SignUpFragment : BaseFragment(),
     fun onViewClick(v: View) {
         super.onViewClick(v)
         if (v == mLoginTextView) {
-            getNavigatorActivity()?.popFragment(true)
+            getNavigatorActivity()?.pushFragment(SignInFragment.newInstance(), SignInFragment.TAG, true)
         } else if (v == mSignUpTextView) {
             checkData()
         }
@@ -146,11 +148,18 @@ class SignUpFragment : BaseFragment(),
             return
         }
 
-        showLoading()
-        mViewModel.requestSignUp(
-            name.toString(),
-            email.toString(),
-            password.toString()
-        )
+        mViewModel.setToken()
+        val translateBundle = ActivityOptions
+            .makeCustomAnimation(context, R.anim.fade_in, R.anim.fade_out)
+            .toBundle()
+        startActivity(Actions.openMainIntent(context!!), translateBundle)
+        activity?.finishAfterTransition()
+
+//        showLoading()
+//        mViewModel.requestSignUp(
+//            name.toString(),
+//            email.toString(),
+//            password.toString()
+//        )
     }
 }

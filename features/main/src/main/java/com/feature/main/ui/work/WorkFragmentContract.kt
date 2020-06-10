@@ -1,5 +1,7 @@
 package com.feature.main.ui.work
 
+import androidx.lifecycle.MutableLiveData
+import com.app.data.model.TaskModel
 import com.feature.main.ui.work.dto.MonthDto
 import com.lib.core.fragment.BaseFragmentContract
 
@@ -18,5 +20,13 @@ interface WorkFragmentContract {
         fun setYear(year: Int)
 
         fun requestListDate(): ArrayList<MonthDto>
+
+        fun getCurrentDay() : Int
+
+        fun requestGetListTaskLiveData(): MutableLiveData<List<TaskModel>>?
+
+        fun requestGetListTaskErrorLiveData(): MutableLiveData<String>?
+
+        fun requestGetListTask()
     }
 }

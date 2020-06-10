@@ -31,5 +31,7 @@
 
         <activity android:name=".ui.account.edit_account.EditAccountActivity" />
         <activity android:name=".ui.work.detail.DetailWorkActivity" />
+
+        <service android:name=".service.LocationService"/>
     </application>
 </manifest>

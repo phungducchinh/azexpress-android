@@ -18,7 +18,7 @@ class CalendarAdapter(
 ) : RecyclerView.Adapter<CalendarAdapter.CalendarHolder>() {
 
     private var mItems: ArrayList<MonthDto>? = null
-    private var mCurrentPosition: Int = -1
+    private var mCurPos = -1
 
     override
     fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarHolder {
@@ -55,16 +55,8 @@ class CalendarAdapter(
         return this
     }
 
-    fun setCurrentPosition(pos: Int) {
-        this.mCurrentPosition = pos
-    }
-
-    fun getCurrentPosition(): Int {
-        return this.mCurrentPosition
-    }
-
-    fun getCurrentItem(): MonthDto? {
-        return mItems?.get(mCurrentPosition)
+    fun setCurrentPosition(position: Int){
+        this.mCurPos = position
     }
 
     override
@@ -75,7 +67,7 @@ class CalendarAdapter(
             holder.mDateTextView.text = it.getDay().toString()
             holder.mDayTextView.text = it.getNameDay()
             // set date text color
-            if (mMonth == it.getMonth() && (it.isCurrentDay() || mCurrentPosition == position)) {
+            if (mMonth == it.getMonth() && mYear == it.getYear() && mCurPos == position) {
                 holder.mDateTextView.setTextColor(ContextCompat.getColor(mContext, R.color.white))
                 holder.mDateTextView.setBackgroundResource(R.drawable.bg_circle_ecstasy)
             } else if (mMonth == it.getMonth() && mYear == it.getYear()) {
@@ -104,26 +96,19 @@ class CalendarAdapter(
         override
         fun onClick(v: View?) {
             if (v == mDateTextView) {
-                if (mCurrentPosition == adapterPosition) {
-                    mCurrentPosition = -1
-                    notifyDataSetChanged()
-                    mOnCalendarClickListener.onUnClick()
-                } else {
-                    val monthDto = mItems?.get(adapterPosition)
-                    monthDto?.let {
-                        if (mMonth == it.getMonth() && mYear == it.getYear()) {
-                            mCurrentPosition = adapterPosition
-                            notifyDataSetChanged()
-                            mOnCalendarClickListener.onClick(it)
-                        }
+                mCurPos = adapterPosition
+                val monthDto = mItems?.get(adapterPosition)
+                monthDto?.let {
+                    if (mMonth == it.getMonth() && mYear == it.getYear()) {
+                        mOnCalendarClickListener.onClick(it)
                     }
                 }
+                notifyDataSetChanged()
             }
         }
     }
 
     public interface OnCalendarClickListener {
         fun onClick(monthDto: MonthDto)
-        fun onUnClick()
     }
 }

@@ -92,11 +92,7 @@ class SignInFragment : BaseFragment(),
     fun onViewClick(v: View) {
         super.onViewClick(v)
         if (v == mSignUpTextView) {
-            getNavigatorActivity()?.pushFragment(
-                SignUpFragment.newInstance(),
-                SignUpFragment.TAG,
-                true
-            )
+            getNavigatorActivity()?.popFragment(true)
         } else if (v == mLoginTextView) {
             checkData()
         } else if(v == mForgotPasswordTextView){
@@ -149,7 +145,14 @@ class SignInFragment : BaseFragment(),
             return
         }
 
-        showLoading()
-        mViewModel.requestLogin(email.toString(), password.toString())
+        mViewModel.setToken()
+        val translateBundle = ActivityOptions
+            .makeCustomAnimation(context, R.anim.fade_in, R.anim.fade_out)
+            .toBundle()
+        startActivity(Actions.openMainIntent(context!!), translateBundle)
+        activity?.finishAfterTransition()
+
+//        showLoading()
+//        mViewModel.requestLogin(email.toString(), password.toString())
     }
 }

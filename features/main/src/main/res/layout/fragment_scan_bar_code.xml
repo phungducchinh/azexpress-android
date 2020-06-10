@@ -68,21 +68,20 @@
         app:layout_constraintTop_toBottomOf="@id/top_bar_constraint_layout"
         app:maskColor="#000000" />
 
-
-    <com.lib.core.widget.BaseTextView
-        android:id="@+id/scan_barcode_text_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/bg_solid_ecstaty_radius_10"
-        android:fontFamily="@font/roboto_medium"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="@string/barcode_quet_ma_ngay"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.5" />
+<!--    <com.lib.core.widget.BaseTextView-->
+<!--        android:id="@+id/scan_barcode_text_view"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="25dp"-->
+<!--        android:background="@drawable/bg_solid_ecstaty_radius_10"-->
+<!--        android:fontFamily="@font/roboto_medium"-->
+<!--        android:gravity="center"-->
+<!--        android:padding="10dp"-->
+<!--        android:text="@string/barcode_quet_ma_ngay"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="16sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintWidth_percent="0.5" />-->
 </com.lib.core.widget.BaseConstraintLayout>
